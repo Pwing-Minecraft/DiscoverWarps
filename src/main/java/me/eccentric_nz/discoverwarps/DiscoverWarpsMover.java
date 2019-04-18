@@ -5,6 +5,7 @@ package me.eccentric_nz.discoverwarps;
 
 import com.onarandombox.MultiverseCore.MultiverseCore;
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
+import io.papermc.lib.PaperLib;
 import multiworld.MultiWorldPlugin;
 import multiworld.api.MultiWorldAPI;
 import multiworld.api.MultiWorldWorldData;
@@ -46,11 +47,11 @@ public class DiscoverWarpsMover {
         }
 
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            thePlayer.teleport(theLocation);
+            PaperLib.teleportAsync(thePlayer, theLocation);
             thePlayer.getWorld().playSound(theLocation, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
         }, 5L);
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            thePlayer.teleport(theLocation);
+            PaperLib.teleportAsync(thePlayer, theLocation);
             if (plugin.getConfig().getBoolean("no_damage")) {
                 thePlayer.setNoDamageTicks(plugin.getConfig().getInt("no_damage_time") * 20);
             }
