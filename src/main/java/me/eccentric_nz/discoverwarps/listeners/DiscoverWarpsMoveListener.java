@@ -1,4 +1,4 @@
-package me.eccentric_nz.discoverwarps;
+package me.eccentric_nz.discoverwarps.listeners;
 
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.math.BlockVector3;
@@ -7,6 +7,9 @@ import com.sk89q.worldguard.internal.platform.WorldGuardPlatform;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import me.eccentric_nz.discoverwarps.DiscoverWarps;
+import me.eccentric_nz.discoverwarps.DiscoverWarpsDatabase;
+import me.eccentric_nz.discoverwarps.DiscoverWarpsSession;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.ExperienceOrb;

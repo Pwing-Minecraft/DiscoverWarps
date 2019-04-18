@@ -1,5 +1,8 @@
-package me.eccentric_nz.discoverwarps;
+package me.eccentric_nz.discoverwarps.listeners;
 
+import me.eccentric_nz.discoverwarps.DiscoverWarps;
+import me.eccentric_nz.discoverwarps.DiscoverWarpsDatabase;
+import me.eccentric_nz.discoverwarps.DiscoverWarpsMover;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;

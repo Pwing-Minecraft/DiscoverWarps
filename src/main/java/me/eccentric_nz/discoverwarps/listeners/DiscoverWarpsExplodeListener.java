@@ -1,5 +1,7 @@
-package me.eccentric_nz.discoverwarps;
+package me.eccentric_nz.discoverwarps.listeners;
 
+import me.eccentric_nz.discoverwarps.DiscoverWarps;
+import me.eccentric_nz.discoverwarps.DiscoverWarpsDatabase;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.block.Block;

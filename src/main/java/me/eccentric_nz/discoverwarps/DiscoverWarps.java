@@ -1,6 +1,13 @@
 /* Portions of this code are copyright (c) 2011, The Multiverse Team All rights reserved. */
 package me.eccentric_nz.discoverwarps;
 
+import me.eccentric_nz.discoverwarps.commands.DiscoverWarpsCommands;
+import me.eccentric_nz.discoverwarps.listeners.DiscoverWarpsExplodeListener;
+import me.eccentric_nz.discoverwarps.listeners.DiscoverWarpsGUIListener;
+import me.eccentric_nz.discoverwarps.listeners.DiscoverWarpsMoveListener;
+import me.eccentric_nz.discoverwarps.listeners.DiscoverWarpsPlateListener;
+import me.eccentric_nz.discoverwarps.listeners.DiscoverWarpsProtectionListener;
+import me.eccentric_nz.discoverwarps.listeners.DiscoverWarpsSignListener;
 import net.milkbowl.vault.Vault;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
@@ -136,5 +143,17 @@ public class DiscoverWarps extends JavaPlugin {
 
     public String getLocalisedName() {
         return localisedName;
+    }
+
+    public boolean isWorldGuardEnabled() {
+        return pm.isPluginEnabled("WorldGuard");
+    }
+
+    public boolean isMultiverseEnabled() {
+        return pm.isPluginEnabled("Multiverse-Core");
+    }
+
+    public boolean isMultiworldEnabled() {
+        return pm.isPluginEnabled("MultiWorld");
     }
 }

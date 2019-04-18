@@ -69,7 +69,7 @@ public class DiscoverWarpsMover {
      */
     private boolean checkSurvival(World w) {
         boolean bool = false;
-        if (plugin.pm.isPluginEnabled("Multiverse-Core")) {
+        if (plugin.isMultiverseEnabled()) {
             MultiverseCore mv = (MultiverseCore) plugin.pm.getPlugin("Multiverse-Core");
             MultiverseWorld mvw = mv.getCore().getMVWorldManager().getMVWorld(w);
             GameMode gm = mvw.getGameMode();
@@ -77,7 +77,7 @@ public class DiscoverWarpsMover {
                 bool = true;
             }
         }
-        if (plugin.pm.isPluginEnabled("MultiWorld")) {
+        if (plugin.isMultiworldEnabled()) {
             MultiWorldAPI mw = ((MultiWorldPlugin) plugin.pm.getPlugin("MultiWorld")).getApi();
             MultiWorldWorldData mww = mw.getWorld(w.getName());
             if (!mww.isOptionSet(FlagName.CREATIVEWORLD)) {

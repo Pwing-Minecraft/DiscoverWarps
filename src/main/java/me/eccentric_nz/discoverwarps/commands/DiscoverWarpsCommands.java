@@ -1,4 +1,4 @@
-package me.eccentric_nz.discoverwarps;
+package me.eccentric_nz.discoverwarps.commands;
 
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.math.BlockVector3;
@@ -7,6 +7,10 @@ import com.sk89q.worldguard.internal.platform.WorldGuardPlatform;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import me.eccentric_nz.discoverwarps.DiscoverWarps;
+import me.eccentric_nz.discoverwarps.DiscoverWarpsDatabase;
+import me.eccentric_nz.discoverwarps.DiscoverWarpsGUIInventory;
+import me.eccentric_nz.discoverwarps.DiscoverWarpsMover;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -117,7 +121,7 @@ public class DiscoverWarpsCommands implements CommandExecutor {
                         }
                         String region_name = "";
                         // check if the plate is inside a WorldGuard region
-                        if (plugin.getConfig().getBoolean("worldguard_regions") && plugin.pm.isPluginEnabled("WorldGuard")) {
+                        if (plugin.getConfig().getBoolean("worldguard_regions") && plugin.isWorldGuardEnabled()) {
                             WorldGuardPlatform wg = WorldGuard.getInstance().getPlatform();
                             RegionManager rm = wg.getRegionContainer().get(new BukkitWorld(l.getWorld()));
                             BlockVector3 vector = BlockVector3.at(l.getX(), l.getY(), l.getZ());
