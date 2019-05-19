@@ -31,7 +31,6 @@ public class DiscoverWarpsMover {
         Player thePlayer = p;
         Location theLocation = l;
         World to = theLocation.getWorld();
-        boolean allowFlight = thePlayer.getAllowFlight();
         boolean crossWorlds = (from != to);
         boolean isSurvival = checkSurvival(to);
 
@@ -39,18 +38,24 @@ public class DiscoverWarpsMover {
         theLocation.setX(l.getX() + 0.5);
         theLocation.setZ(l.getZ() + 0.5);
 
-        // try loading chunk
-        World world = l.getWorld();
-        Chunk chunk = world.getChunkAt(l);
-        if (!world.isChunkLoaded(chunk)) {
-            world.loadChunk(chunk);
-        }
+        // Disable chunk load here as the teleport method handles this
+
+        // World world = l.getWorld();
+        // Chunk chunk = world.getChunkAt(l);
+        // if (!world.isChunkLoaded(chunk)) {
+        //    world.loadChunk(chunk);
+        //}
 
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             PaperLib.teleportAsync(thePlayer, theLocation);
             thePlayer.getWorld().playSound(theLocation, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
         }, 5L);
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+            boolean allowFlight = thePlayer.getAllowFlight();
+            if (!plugin.getConfig().getBoolean("allow_flight")) {
+                allowFlight = false;
+            }
+
             PaperLib.teleportAsync(thePlayer, theLocation);
             if (plugin.getConfig().getBoolean("no_damage")) {
                 thePlayer.setNoDamageTicks(plugin.getConfig().getInt("no_damage_time") * 20);
