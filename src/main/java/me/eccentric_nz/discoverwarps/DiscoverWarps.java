@@ -12,6 +12,8 @@ import net.milkbowl.vault.Vault;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -19,6 +21,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +39,9 @@ public class DiscoverWarps extends JavaPlugin {
     private Map<UUID, DiscoverWarpsSession> discoverWarpSessions;
     private Map<UUID, Long> discoverWarpCooldowns;
     private String localisedName;
+
+    private File itemFile;
+    private FileConfiguration itemConfig;
 
     @Override
     public void onDisable() {
@@ -68,6 +74,17 @@ public class DiscoverWarps extends JavaPlugin {
         } catch (Exception e) {
             console.sendMessage(THE_PLUGIN_NAME + " Connection and Tables Error: " + e);
         }
+
+        itemFile = new File(getDataFolder(), "items.yml");
+        if (!itemFile.exists()) {
+            try {
+                itemFile.createNewFile();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        itemConfig = YamlConfiguration.loadConfiguration(itemFile);
+
         localisedName = ChatColor.GOLD + "[" + getConfig().getString("localisation.plugin_name") + "] " + ChatColor.RESET;
         commando = new DiscoverWarpsCommands(this);
         getCommand("discoverwarps").setExecutor(commando);
@@ -155,5 +172,17 @@ public class DiscoverWarps extends JavaPlugin {
 
     public boolean isMultiworldEnabled() {
         return pm.isPluginEnabled("MultiWorld");
+    }
+
+    public FileConfiguration getItemConfig() {
+        return itemConfig;
+    }
+
+    public void saveItemConfig() {
+        try {
+            itemConfig.save(itemFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

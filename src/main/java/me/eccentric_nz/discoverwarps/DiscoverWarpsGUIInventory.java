@@ -3,6 +3,7 @@
  */
 package me.eccentric_nz.discoverwarps;
 
+import me.eccentric_nz.discoverwarps.utilities.ItemUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -58,6 +59,12 @@ public class DiscoverWarpsGUIInventory {
                         ItemMeta im = is.getItemMeta();
                         im.setDisplayName(warp);
                         is.setItemMeta(im);
+
+                        ItemStack configItem = ItemUtil.readItemFromConfig("items", plugin.getItemConfig());
+                        if (configItem != null) {
+                            is = configItem;
+                        }
+
                         stack[i] = is;
                         if (i > 52) {
                             break;
