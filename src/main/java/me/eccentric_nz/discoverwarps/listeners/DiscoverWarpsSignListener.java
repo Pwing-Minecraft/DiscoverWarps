@@ -4,7 +4,7 @@ import me.eccentric_nz.discoverwarps.DiscoverWarps;
 import me.eccentric_nz.discoverwarps.DiscoverWarpsDatabase;
 import me.eccentric_nz.discoverwarps.DiscoverWarpsMover;
 import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -34,7 +34,7 @@ public class DiscoverWarpsSignListener implements Listener {
     public void onSignClick(PlayerInteractEvent event) {
         Action a = event.getAction();
         Block b = event.getClickedBlock();
-        if (a.equals(Action.RIGHT_CLICK_BLOCK) && (b.getType().equals(Material.WALL_SIGN) || b.getType().equals(Material.SIGN))) {
+        if (a.equals(Action.RIGHT_CLICK_BLOCK) && Tag.SIGNS.getValues().contains(b.getType())) {
             Sign s = (Sign) b.getState();
             if (s.getLine(0).equalsIgnoreCase("[" + plugin.getConfig().getString("sign") + "]")) {
                 Player p = event.getPlayer();
@@ -61,6 +61,7 @@ public class DiscoverWarpsSignListener implements Listener {
                                 int y = rsPlate.getInt("y");
                                 int z = rsPlate.getInt("z");
                                 double cost = rsPlate.getDouble("cost");
+                                boolean auto = rsPlate.getBoolean("auto");
                                 String queryDiscover = "";
                                 // check whether they have visited this plate before
                                 String queryPlayer = "SELECT * FROM players WHERE uuid = '" + uuid + "'";
@@ -74,7 +75,7 @@ public class DiscoverWarpsSignListener implements Listener {
                                     if (Arrays.asList(visited).contains(id)) {
                                         discovered = true;
                                     }
-                                    if (discovered == false) {
+                                    if (discovered == false && auto == false) {
                                         // check if there is a cost
                                         if (cost > 0 && plugin.getConfig().getBoolean("allow_buying")) {
                                             // check if they have sufficient balance
@@ -88,6 +89,11 @@ public class DiscoverWarpsSignListener implements Listener {
                                         } else {
                                             p.sendMessage(plugin.getLocalisedName() + String.format(plugin.getConfig().getString("localisation.signs.needs_discover"), warp));
                                             return;
+                                        }
+                                    } else if (auto == true) {
+                                        plugin.debug("Auto is true");
+                                        if (!data.isEmpty()) {
+                                            queryDiscover = "UPDATE players SET visited = '" + data + "," + id + "' WHERE uuid = '" + uuid + "'";
                                         }
                                     }
                                 }

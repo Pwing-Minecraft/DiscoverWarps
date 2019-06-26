@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.eccentric_nz.discoverwarps</groupId>
     <artifactId>DiscoverWarps</artifactId>
-    <version>1.6.4</version>
+    <version>1.7</version>
     <name>DiscoverWarps</name>
     <repositories>
         <repository>
@@ -88,7 +88,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.13-R0.1-SNAPSHOT</version>
+            <version>1.14-R0.1-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
             <exclusions>
@@ -125,7 +125,7 @@
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>vault</artifactId>
-            <version>1.7.1</version>
+            <version>1.7.2</version>
             <type>jar</type>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Vault.jar</systemPath>
