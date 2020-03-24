@@ -16,6 +16,6 @@ permissions:
     default: op
 commands:
   discoverwarps:
-    aliases: [dw]
+    aliases: [dw, checkpoint, cp]
     description: Allow players to set, delete, enable, disable, list and teleport to DiscoverWarps
     usage: type /<command> to see help...
